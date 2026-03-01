@@ -1,19 +1,19 @@
-# Task 24: Capstone Project - Web Server Deployment
+# Task 24: SLA, Service Lifecycle & Subscription Management
 
 ## Objective
-To deploy a functional web server on an Azure Virtual Machine, demonstrating the integration of Compute, Networking, and Security components.
+To explore Azure governance tools by reviewing Subscription details, understanding Service Level Agreements (SLA), and monitoring Service Health lifecycle events.
 
 ## Steps Taken
-1. Compute: Accessed the Ubuntu Virtual Machine (Milan-VM) via SSH.
-2. Configuration: Installed and started the Apache2 web server using standard Linux commands.
-3. Security: Configured the Network Security Group (NSG) to allow inbound traffic on Port 80 (HTTP).
-4. Verification: Accessed the web server via the Public IP address to view the default landing page.
+1. Subscription Management: Navigated to the Subscriptions blade in the Azure Portal to verify the account status, billing period, and active user roles.
+2. Service Health Check: Accessed the Azure Service Health dashboard to monitor the status of global Azure regions.
+3. SLA Verification: Reviewed the "Health history" and "Planned maintenance" sections to understand how Azure communicates service availability and lifecycle updates.
 
-## Resources Deployed
-* Virtual Machine: Milan-VM
-* Web Server: Apache2
-* Protocol Allowed: HTTP (Port 80)
+## Resources Used
+* Azure Portal (Global Search)
+* Blade: Subscriptions
+* Blade: Service Health
+* Feature: Activity Log & Health History
 
 ## Proofs
-* WebServer_Status.png: Screenshot showing the Apache service running in the terminal.
-* Web_Page.png: Screenshot of the default web page accessed via the Public IP.
+* Subscription_Overview.png: Screenshot showing the active subscription details and ID.
+* Service_Health_SLA.png: Screenshot of the Service Health map confirming service availability and SLA status.
