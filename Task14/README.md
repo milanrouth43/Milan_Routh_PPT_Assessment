@@ -1,15 +1,21 @@
-# Task 14: CloudWatch Alarm (70% CPU → Auto Stop + Email)
+# Task 14: CloudWatch Alarm (High CPU → Auto Stop)
 
 ## Objective
-To understand automated monitoring and resource management by configuring a CloudWatch alarm that triggers cost-saving and notification actions.
+To configure an automated monitoring and response system using Amazon CloudWatch. The goal is to detect high CPU usage (>70%) and automatically stop the instance to prevent resource exhaustion or cost overruns.
 
-## Implementation Steps
-1. Configured an Amazon SNS topic to handle email alerts for system thresholds.
-2. Created a CloudWatch Metric Alarm monitoring the `CPUUtilization` of a target EC2 instance.
-3. Defined a static threshold of 70% for the alarm trigger.
-4. Integrated an EC2 Action to automatically "Stop" the instance when the threshold is breached to prevent resource wastage.
-5. Linked the SNS notification to the alarm state to ensure immediate administrative visibility.
+## Steps Taken
+1. SNS Topic: Created `HighCPU_Alert` to send email notifications when the alarm triggers.
+2. CloudWatch Alarm: Configured a metric alarm for `CPUUtilization` with a threshold of 70%.
+3. EC2 Action: Added an automated action to "Stop this instance" when the alarm state is reached.
+4. Stress Testing: Used the Linux `stress` tool (`stress --cpu 1`) to artificially spike CPU usage to 100%, successfully triggering the alarm and shutting down the server.
 
-## Proofs of Completion
-- cloudwatch_alarm_config.png: Screenshot of the alarm threshold and metric configuration.
-- cloudwatch_actions.png: Screenshot confirming the automated Stop action and SNS notification settings.
+## Resources Used
+* Amazon CloudWatch (Alarms & Metrics)
+* Amazon EC2 (Action: Stop Instance)
+* Amazon SNS (Email Notification)
+* Linux Utility: `stress`
+
+## Proofs
+* Alarm_Triggered.png: Screenshot of the CloudWatch dashboard showing the alarm in the "ALARM" state due to high CPU.
+* EC2_Auto_Stopped.png: Screenshot of the EC2 instance status changing to "Stopping" automatically after the alarm triggered.
+* Email_Alarm_Notification.png: Screenshot of the email alert received from AWS SNS confirming the high CPU event.
