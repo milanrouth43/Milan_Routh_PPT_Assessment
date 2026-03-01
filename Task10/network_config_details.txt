@@ -1,0 +1,44 @@
+=========================================================
+TASK 10: VPC 3-TIER ARCHITECTURE NETWORK DETAILS
+=========================================================
+
+1. VPC CONFIGURATION
+---------------------------------------------------------
+VPC Name: 3-Tier-VPC-vpc
+IPv4 CIDR Block: 10.0.0.0/16
+Region: us-east-1
+
+2. SUBNET CONFIGURATION
+---------------------------------------------------------
+Public Subnets (Web/Bastion Tier):
+- Name: 3-Tier-VPC-subnet-public1-us-east-1a | AZ: us-east-1a | CIDR: 10.0.0.0/20
+- Name: 3-Tier-VPC-subnet-public2-us-east-1b | AZ: us-east-1b | CIDR: 10.0.16.0/20
+
+Private Subnets (Application/Database Tier):
+- Name: 3-Tier-VPC-subnet-private1-us-east-1a | AZ: us-east-1a | CIDR: 10.0.128.0/20
+- Name: 3-Tier-VPC-subnet-private2-us-east-1b | AZ: us-east-1b | CIDR: 10.0.144.0/20
+
+3. GATEWAYS
+---------------------------------------------------------
+- Internet Gateway (IGW): Attached to VPC to allow public inbound/outbound traffic.
+- NAT Gateway: Deployed in 3-Tier-VPC-subnet-public1-us-east-1a to allow private subnets secure outbound internet access.
+
+4. ROUTING RULES
+---------------------------------------------------------
+Public Route Table (3-Tier-VPC-rtb-public):
+- Destination: 10.0.0.0/16 -> Target: local
+- Destination: 0.0.0.0/0   -> Target: igw-xxxx (Internet Gateway)
+
+Private Route Table 1 (3-Tier-VPC-rtb-private1-us-east-1a):
+- Destination: 10.0.0.0/16 -> Target: local
+- Destination: 0.0.0.0/0   -> Target: nat-xxxx (NAT Gateway)
+
+Private Route Table 2 (3-Tier-VPC-rtb-private2-us-east-1b):
+- Destination: 10.0.0.0/16 -> Target: local
+- Destination: 0.0.0.0/0   -> Target: nat-xxxx (NAT Gateway)
+
+5. SECURITY GROUPS (FIREWALLS)
+---------------------------------------------------------
+- Bastion-SG: Allows Inbound SSH (Port 22) from 0.0.0.0/0 (or specific local IP).
+- Private-App-SG: Allows Inbound SSH (Port 22) strictly from Bastion-SG only.
+=========================================================
