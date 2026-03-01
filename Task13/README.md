@@ -1,29 +1,21 @@
 # Task 13: Start/Stop EC2 using Lambda + API Gateway
 
 ## Objective
-To learn serverless automation and API integration by using AWS API Gateway to trigger a Lambda function that controls the state (Start/Stop) of an EC2 instance.
+To implement serverless automation by creating a REST API that triggers a Lambda function to control (Start/Stop) an EC2 instance dynamically.
 
-## Implementation Steps
+## Steps Taken
+1. IAM Role: Created `Lambda_EC2_Control_Role` with `AmazonEC2FullAccess` to allow the function to manage instance states.
+2. Lambda Function: Deployed a Python script using `boto3` that accepts query parameters (`?action=start` or `?action=stop`) to control the target instance.
+3. API Gateway: Configured a REST API with a GET method integrated with the Lambda function (Proxy Integration enabled).
+4. Deployment: Deployed the API to a `dev` stage and tested the Invoke URL to successfully toggle the instance state.
 
-### 1. IAM Role Configuration
-- Created a custom IAM Role for AWS Lambda.
-- Attached the `AmazonEC2FullAccess` policy to grant the Lambda function the necessary permissions to modify EC2 instance states.
+## Resources Used
+* AWS Lambda (Python 3.9)
+* Amazon API Gateway (REST API)
+* Amazon EC2 (Target Instance)
+* IAM Role (EC2 Access)
 
-### 2. Lambda Function Deployment
-- Provisioned a new Lambda function using the Python 3.12 runtime.
-- Wrote a custom `boto3` script to initialize an EC2 client and execute the `start_instances` command against a specific target EC2 Instance ID.
-- Configured the function to return a 200 OK status and a JSON success message upon execution.
-
-### 3. API Gateway Integration
-- Configured an Amazon API Gateway (HTTP API) as the front-end trigger for the Lambda function.
-- Set the endpoint security to 'Open' for immediate testing and accessibility.
-
-### 4. Verification and API Output
-- Invoked the API endpoint directly via a web browser.
-- Successfully received the JSON response payload confirming execution.
-- Verified in the EC2 Management Console that the target instance transitioned from a "Stopped" to a "Running" state.
-
-## Proofs of Completion
-- lambda_api_trigger.png: Screenshot of the Lambda console showing the API Gateway trigger configuration.
-- api_browser_output.png: Screenshot of the browser window displaying the successful API response payload.
-- ec2_starting.png: Screenshot of the EC2 console confirming the instance state change triggered by the automation.
+## Proofs
+* API_Stop_Response.png: Screenshot of the browser response confirming the API call successfully triggered the "Stop" action.
+* EC2_Stopped_Proof.png: Screenshot of the EC2 console verifying the instance actually stopped.
+* API_Gateway_Dashboard.png: Screenshot of the API Gateway resource and method configuration.
