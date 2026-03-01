@@ -1,28 +1,20 @@
 # Task 12: Website Down Alert using Lambda (Canary) + SNS
 
 ## Objective
-The primary objective of this task is to understand automated monitoring and alerting mechanisms. This is achieved by configuring a serverless monitor to continuously verify website uptime and alert administrators during downtime.
+To implement an automated monitoring system using a "Canary" approach. A Lambda function checks website availability and triggers an SNS email notification if the site is unreachable.
 
-## Implementation Steps
+## Steps Taken
+1. SNS Topic: Created a topic named `WebsiteDownAlert` and subscribed an email endpoint.
+2. IAM Role: Configured `LambdaSNS_Canary_Role` with `AmazonSNSFullAccess` to allow publishing alerts.
+3. Lambda Function: Deployed a Python script using `urllib3` to send HTTP requests to the target URL.
+4. Logic: If the HTTP status is not 200 or the connection fails, the function publishes a message to the SNS topic.
 
-### 1. Notification System Configuration
-- Created an Amazon SNS (Simple Notification Service) Standard Topic to handle alerts.
-- Configured an Email subscription and successfully confirmed the endpoint to receive notifications.
+## Resources Used
+* AWS Lambda (Python 3.9)
+* Amazon SNS (Standard Topic)
+* IAM Role (Service Permissions)
 
-### 2. Synthetics Canary Deployment
-- Utilized AWS CloudWatch Synthetics to provision an automated Canary check.
-- Used the "Heartbeat Monitoring" blueprint, which automatically deploys a Lambda function to simulate a user pinging the website endpoint.
-- Configured the Canary to test the endpoint on a continuous 5-minute schedule.
-
-### 3. Automated Alerting Integration
-- Integrated a CloudWatch Alarm directly into the Canary deployment.
-- Linked the alarm state to the SNS Topic created in step 1, ensuring that any failed health check immediately triggers an automated email notification to the administrator.
-
-### 4. Validation and Testing
-- Purposefully configured the Canary to monitor a non-existent URL to simulate a website outage.
-- Verified the architecture by successfully capturing the failed Canary state in CloudWatch and receiving the automated SNS alert email.
-
-## Proofs of Completion
-- sns_subscription.png: Verification of the active SNS email subscription.
-- canary_dashboard.png: CloudWatch console screenshot showing the active Canary check system.
-- email_alert_received.png: Evidence of the automated CloudWatch alarm email successfully delivered to the inbox.
+## Proofs
+* Lambda_Function_Code.png: Screenshot of the Python logic and execution logs showing the alert trigger.
+* Email_Alert_Proof.png: Screenshot of the automated email received during the failure simulation.
+* SNS_Topic_Config.png: Screenshot of the SNS topic with confirmed email subscription.
