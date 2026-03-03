@@ -17,7 +17,7 @@ To simulate a secure on-premise to cloud network architecture using a Bastion Ho
 5.  **Secure Access**: 
     - Logged into the Bastion Host using the private key.
     - "Jumped" to the Private VM using the local network IP.
-6.  **Verification**: Confirmed successful login to the private IP address (`10.0.x.x`) from the Bastion terminal.
+6.  **Verification**: Confirmed successful login to the private IP address (10.0.x.x) from the Bastion terminal.
 
 ## Proof of Completion
 * **Bastion_Jump_Success.png**: Terminal screenshot showing the SSH jump from Public to Private IP.
